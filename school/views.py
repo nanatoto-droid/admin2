@@ -1,6 +1,6 @@
 
 from django.shortcuts import render, redirect
-from .models import Student
+from .models import Student, SchoolImage
 from .forms import StudentForm
 
 def home(request):
@@ -35,3 +35,7 @@ def student_delete(request, pk):
     student = Student.objects.get(id=pk)
     student.delete()
     return redirect('student_list')
+
+def home(request):
+    images = SchoolImage.objects.all()  # Fetch all uploaded images
+    return render(request, 'home.html', {'images': images})

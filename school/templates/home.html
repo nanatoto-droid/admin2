@@ -1,11 +1,59 @@
-{% extends 'base.html' %}
 
+{% extends 'base.html' %}
+{% load static %}
 {% block title %}Welcome to Our School{% endblock %}
 
 {% block content %}
+<!-- Hero Section -->
 <div class="hero">
-    <h1>Welcome to Our School</h1>
-    <p>Effortlessly manage student records.</p>
-    <a href="{% url 'student_create' %}" class="button">Register a Student</a>
+    <div class="hero-content">
+        <div class="text">
+            <h1>Welcome to Our School</h1>
+            <p>Empowering students with knowledge and innovation.</p>
+            <a href="{% url 'student_create' %}" class="button">Register a Student</a>
+            <br><br><br>
+        </div>
+        <div class="image">
+            <img src="{% static 'images/bannar.jpeg' %}" alt="School Campus" width="900" height="500">
+        </div>
+    </div>
 </div>
+<!-- Image Section -->
+<div class="image-gallery">
+    {% for img in images %}
+        <div class="gallery-item">
+            <img src="{{ img.image.url }}" alt="{{ img.title }}">
+        </div>
+    {% endfor %}
+</div>
+<!-- Features Section -->
+<section class="features">
+    <h2>Why Choose Our School?</h2>
+    <div class="feature-grid">
+        <div class="feature-item">
+            <img src="{% static 'images/campus.jpeg' %}" alt="Education Icon">
+            <h3>📚 Quality Education</h3>
+            <p>We provide top-notch education with experienced faculty.</p>
+        </div>
+        <div class="feature-item">
+            <img src="{% static 'images/class.jpeg' %}" alt="Learning Icon">
+            <h3>💡 Modern Learning</h3>
+            <p>Interactive classes, smart boards, and e-learning solutions.</p>
+        </div>
+        <div class="feature-item">
+            <img src="{% static 'images/grad.jpeg' %}" alt="Student Success">
+            <h3>🎓 Student Success</h3>
+            <p>Our students achieve excellence in academics and careers.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact">
+    <h2>Get in Touch</h2>
+    <p>📍 Address: 123 School Lane, Nairobi,kenya</p>
+    <p>📞 Phone: +123 456 7890</p>
+    <p>📧 Email: info @ourschool.com</p>
+</section>
+
 {% endblock %}
