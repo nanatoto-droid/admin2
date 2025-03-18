@@ -2,6 +2,10 @@
 
 {% block content %}
 <h2>Student List</h2>
+    <form method="GET" action="{% url 'student_list' %}" class="search-form">
+    <input type="text" name="search" placeholder="Search students..." value="{{ query }}">
+    <button type="submit">🔍 Search</button>
+</form>
 <table>
     <thead>
         <tr>
@@ -11,6 +15,7 @@
             <th>Age</th>
             <th>Course</th>
             <th>Actions</th>
+            <th>Gender</th>
         </tr>
     </thead>
     <tbody>
@@ -21,6 +26,7 @@
             <td>{{ student.email }}</td>
             <td>{{ student.age }}</td>
             <td>{{ student.course }}</td>
+            <tb>{{ student.gender }}</tb>
             <td>
                 <a href="{% url 'student_update' student.id %}">Edit</a>
                 <a href="{% url 'student_delete' student.id %}">Delete</a>

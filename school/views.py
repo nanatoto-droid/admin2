@@ -1,7 +1,23 @@
 
 from django.shortcuts import render, redirect
-from .models import Student, SchoolImage
+from .models import Student, SchoolImage, News
 from .forms import StudentForm
+from django.db.models import Count
+
+def dashboard(request):
+    total_students = Student.objects.count()
+    male_students = Student.objects.filter(gender="Male").count()
+    female_students = Student.objects.filter(gender="Female").count()
+    recent_students = Student.objects.order_by('-id')[:5]  # Show last 5 added students
+
+    context = {
+        'total_students': total_students,
+        'male_students': male_students,
+        'female_students': female_students,
+        'recent_students': recent_students,
+    }
+    return render(request, 'dashboard.html', context)
+
 
 def home(request):
     return render(request, 'home.html')
@@ -39,3 +55,20 @@ def student_delete(request, pk):
 def home(request):
     images = SchoolImage.objects.all()  # Fetch all uploaded images
     return render(request, 'home.html', {'images': images})
+
+def news_list(request):
+    news = News.objects.order_by('-date_posted')
+    return render(request, 'news_list.html', {'news': news})
+
+def student_detail(request, student_id):
+    student = Student.objects.get(id=student_id)
+    return render(request, 'student_detail.html', {'student': student})
+
+# def home(request):
+#     testimonials = Testimonial.objects.order_by('-date_posted')[:3]  # Show latest 3
+#     return render(request, 'home.html', {'testimonials': testimonials})
+
+def student_list(request):
+    query = request.GET.get('search', '')  # Get the search query
+    students = Student.objects.filter(name__icontains=query) if query else Student.objects.all()
+    return render(request, 'student_list.html', {'students': students, 'query': query})
