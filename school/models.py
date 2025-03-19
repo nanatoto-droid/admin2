@@ -6,10 +6,10 @@ class Student(models.Model):
     email = models.EmailField(unique=True)
     age = models.IntegerField()
     course = models.CharField(max_length=100)
-    class_name = models.CharField(max_length=50)
-    gender = models.CharField(max_length=10, choices=[('Male', 'Male'), ('Female', 'Female')])
+    class_name = models.CharField(max_length=50,null=True)
+    gender = models.CharField(max_length=10, choices=[('Male', 'Male'), ('Female', 'Female')],null=True)
     image = models.ImageField(upload_to='student_images/', blank=True, null=True)
-    enrollment_date = models.DateTimeField(auto_now_add=True)
+    enrollment_date = models.DateTimeField(auto_now_add=True,null=True)
 
     def __str__(self):
         return self.name
@@ -36,3 +36,4 @@ class News(models.Model):
 
         def __str__(self):
             return f"{self.name}'s Feedback"
+

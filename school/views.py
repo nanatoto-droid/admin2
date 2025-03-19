@@ -23,8 +23,10 @@ def home(request):
     return render(request, 'home.html')
 
 def student_list(request):
-    students = Student.objects.all()
-    return render(request, 'student_list.html', {'students': students})
+    query = request.GET.get('search', '')
+    students = Student.objects.filter(name__icontains=query) if query else Student.objects.all()
+    return render(request, 'student_list.html', {'students': students, 'query': query})
+
 
 def student_create(request):
     if request.method == 'POST':
@@ -64,11 +66,5 @@ def student_detail(request, student_id):
     student = Student.objects.get(id=student_id)
     return render(request, 'student_detail.html', {'student': student})
 
-# def home(request):
-#     testimonials = Testimonial.objects.order_by('-date_posted')[:3]  # Show latest 3
-#     return render(request, 'home.html', {'testimonials': testimonials})
 
-def student_list(request):
-    query = request.GET.get('search', '')  # Get the search query
-    students = Student.objects.filter(name__icontains=query) if query else Student.objects.all()
-    return render(request, 'student_list.html', {'students': students, 'query': query})
+
