@@ -4,21 +4,10 @@ from .models import Student, SchoolImage, News
 from .forms import StudentForm
 from  .forms import  NewsForm
 from django.db.models import Count
-
 def dashboard(request):
-    total_students = Student.objects.count()
-    male_students = Student.objects.filter(gender="Male").count()
-    female_students = Student.objects.filter(gender="Female").count()
-    recent_students = Student.objects.order_by('-id')[:5]  # Show last 5 added students
-
-    context = {
-        'total_students': total_students,
-        'male_students': male_students,
-        'female_students': female_students,
-        'recent_students': recent_students,
-    }
-    return render(request, 'dashboard.html', context)
-
+    students = Student.objects.all()  # Fetch all students
+    news = News.objects.order_by('-date_posted')[:5]  # Fetch latest 5 news articles
+    return render(request, 'dashboard.html', {'students': students, 'news': news})
 
 def home(request):
     return render(request, 'home.html')
