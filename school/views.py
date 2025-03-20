@@ -1,7 +1,8 @@
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from .models import Student, SchoolImage, News
 from .forms import StudentForm
+from  .forms import  NewsForm
 from django.db.models import Count
 
 def dashboard(request):
@@ -61,6 +62,33 @@ def home(request):
 def news_list(request):
     news = News.objects.order_by('-date_posted')
     return render(request, 'news_list.html', {'news': news})
+def add_news(request):
+    if request.method == "POST":
+        form = NewsForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('news_list')
+    else:
+        form = NewsForm()
+    return render(request, 'news_form.html', {'form': form})
+
+def edit_news(request, news_id):
+    news = get_object_or_404(News, id=news_id)
+    if request.method == "POST":
+        form = NewsForm(request.POST, instance=news)
+        if form.is_valid():
+            form.save()
+            return redirect('news_list')
+    else:
+        form = NewsForm(instance=news)
+    return render(request, 'news_form.html', {'form': form})
+
+def delete_news(request, news_id):
+    news = get_object_or_404(News, id=news_id)
+    if request.method == "POST":
+        news.delete()
+        return redirect('news_list')
+    return render(request, 'news_confirm_delete.html', {'news': news})
 
 def student_detail(request, student_id):
     student = Student.objects.get(id=student_id)
