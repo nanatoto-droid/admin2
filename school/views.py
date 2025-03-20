@@ -10,7 +10,12 @@ def dashboard(request):
     return render(request, 'dashboard.html', {'students': students, 'news': news})
 
 def home(request):
-    return render(request, 'home.html')
+    latest_news = News.objects.filter(is_event=False).order_by('-date_posted')[:3]
+    upcoming_events = News.objects.filter(is_event=True).order_by('event_date')[:3]
+
+    return render(request, 'home.html', {
+        'latest_news': latest_news,
+        'upcoming_events': upcoming_events})
 
 def student_list(request):
     query = request.GET.get('search', '')

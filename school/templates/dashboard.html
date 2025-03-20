@@ -31,7 +31,7 @@
             <th>Age</th>
             <th>Gender</th>
             <th>Class</th>
-{#            <th>Actions</th>#}
+
         </tr>
     </thead>
     <tbody>
@@ -41,17 +41,14 @@
             <td>{{ student.name }}</td>
             <td>{{ student.age }}</td>
             <td>
-                {% if student.gender == 'M' %}
+                {% if student.gender == 'Male' %}
                     Male
-                {% elif student.gender == 'F' %}
+                {% elif student.gender == 'Female' %}
                     Female
                 {% endif %}
             </td>
             <td>{{ student.class_name }}</td>
-{#            <td>#}
-{#                <a href="{% url 'edit_student' student.id %}">✏ Edit</a> |#}
-{#                <a href="{% url 'delete_student' student.id %}" onclick="return confirm('Are you sure?')">❌ Delete</a>#}
-{#            </td>#}
+
         </tr>
         {% endfor %}
     </tbody>

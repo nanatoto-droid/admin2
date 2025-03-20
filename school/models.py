@@ -26,6 +26,8 @@ class News(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
     date_posted = models.DateTimeField(auto_now_add=True)
+    is_event = models.BooleanField(default=False)  # True if it's a school event
+    event_date = models.DateField(null=True, blank=True)  # Event date (optional)
 
     def __str__(self):
         return self.title
