@@ -8,7 +8,7 @@ class Student(models.Model):
     course = models.CharField(max_length=100)
     class_name = models.CharField(max_length=50,null=True)
     gender = models.CharField(max_length=10, choices=[('Male', 'Male'), ('Female', 'Female')],null=True)
-    image = models.ImageField(upload_to='student_images/', blank=True, null=True)
+
     enrollment_date = models.DateTimeField(auto_now_add=True,null=True)
 
     def __str__(self):
