@@ -1,23 +1,50 @@
-
+{##}
+{#{% extends 'base.html' %}#}
+{#{% block title %}News & Announcements{% endblock %}#}
+{#{% block content %}#}
+{#<h2>📰 News & Announcements📢</h2>#}
+{##}
+{#<a href="{% url 'add_news' %}" class="button">➕ Add News</a>#}
+{##}
+{#<ul>#}
+{#    {% for article in news %}#}
+{#        <li>#}
+{#            <h3>{{ article.title }}</h3>#}
+{#            <p>{{ article.content }}</p>#}
+{#            <p><small>Posted on: {{ article.date_posted }}</small></p>#}
+{#            <a href="{% url 'edit_news' article.id %}">✏ Edit</a>#}
+{#            <form action="{% url 'delete_news' article.id %}" method="post" style="display:inline;">#}
+{#                {% csrf_token %}#}
+{#                <button type="submit" onclick="return confirm('Are you sure?')">❌ Delete</button>#}
+{#            </form>#}
+{#        </li>#}
+{#    {% endfor %}#}
+{#</ul>#}
+{#{% endblock %}#}
 {% extends 'base.html' %}
 {% block title %}News & Announcements{% endblock %}
+
 {% block content %}
-<h2>📰 News & Announcements📢</h2>
+<div class="news-container">
+    <h2>📰 News & Announcements 📢</h2>
 
-<a href="{% url 'add_news' %}" class="button">➕ Add News</a>
+    <a href="{% url 'add_news' %}" class="button">➕ Add News</a>
 
-<ul>
-    {% for article in news %}
-        <li>
+    <ul class="news-list">
+        {% for article in news %}
+        <li class="news-item">
             <h3>{{ article.title }}</h3>
-            <p>{{ article.content }}</p>
+            <p>{{ article.content|truncatewords:255}}</p>
             <p><small>Posted on: {{ article.date_posted }}</small></p>
-            <a href="{% url 'edit_news' article.id %}">✏ Edit</a>
+            <a href="{% url 'edit_news' article.id %}" class="edit-btn">✏ Edit</a>
             <form action="{% url 'delete_news' article.id %}" method="post" style="display:inline;">
                 {% csrf_token %}
-                <button type="submit" onclick="return confirm('Are you sure?')">❌ Delete</button>
+                <button type="submit" class="delete-btn" onclick="return confirm('Are you sure?')">❌ Delete</button>
             </form>
         </li>
-    {% endfor %}
-</ul>
+        {% empty %}
+        <p>No news available.</p>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}

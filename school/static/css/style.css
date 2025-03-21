@@ -319,3 +319,114 @@ h2 {
 .button:hover {
     background-color: #1565C0;
 }
+.events {
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    background: #E3F2FD;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #1976D2;
+}
+
+
+/* News Page Styling */
+.news-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #E3F2FD;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Page Title */
+.news-container h2 {
+    text-align: center;
+    color: teal;
+    margin-bottom: 20px;
+    font-size: 26px;
+}
+
+/* Add News Button */
+.news-container .button {
+    display: inline-block;
+    background-color: #1976D2;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s;
+    font-weight: bold;
+}
+
+.news-container .button:hover {
+    background-color: #0D47A1;
+}
+
+/* News List */
+.news-list {
+    list-style: none;
+    padding: 0;
+}
+
+/* Individual News Cards */
+.news-item {
+    background: white;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.news-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* News Title */
+.news-item h3 {
+    margin: 0;
+    font-size: 20px;
+    color: #0D47A1;
+}
+
+/* News Content */
+.news-item p {
+    font-size: 14px;
+    color: #333;
+}
+
+/* Edit & Delete Buttons */
+.news-item .edit-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-right: 5px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.news-item .edit-btn:hover {
+    background-color: #388E3C;
+}
+
+.news-item .delete-btn {
+    background-color: #D32F2F;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.news-item .delete-btn:hover {
+    background-color: #B71C1C;
+}
